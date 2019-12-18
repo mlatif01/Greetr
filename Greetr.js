@@ -71,22 +71,52 @@
             return this;
         },
         
+        // log messages to console
         log: function() {
             
             if (console) {
                 console.log(logMessages[this.language] + ': ' + this.fullName());
             }
             
+            // chainable
             return this;
         },
         
+        // set new language for user
         setLang: function(lang) {
             this.language = lang;
             
             this.validate();
             
+            // chainable
             return this;
+        },
+        
+        // HTML Greeting
+        HTMLGreeting: function(selector, isFormal) {
+            if (!$) {
+                throw 'jQuery not loaded';
+            }
+            
+            if (!selector) {
+                throw 'Missing JQuery selector';
+            }
+            
+            var msg;
+            if (isFormal) {
+                msg = this.formalGreeting();
+            }
+            else {
+                msg = this.greeting();
+            }
+            
+            $(selector).html(msg);
+            
+            return this;
+            
+            
         }
+        
         
     };
     

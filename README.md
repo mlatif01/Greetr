@@ -1,5 +1,5 @@
 # Greetr
-Greetr - JavaScript Library
+Greetr - JavaScript Library for greeting users ^ _ ^
 
 Given a first name, last name, and optional language, it generates formal and informal greetings.
 
