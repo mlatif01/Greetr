@@ -107,7 +107,7 @@
                 msg = this.formalGreeting();
             }
             else {
-                msg = this.greeting();
+                msg = this.informalGreeting();
             }
             
             $(selector).html(msg);
