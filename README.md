@@ -1,0 +1,2 @@
+# Greetr
+Greetr - JavaScript Library
