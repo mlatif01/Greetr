@@ -27,7 +27,7 @@
     var logMessages = {
         en: 'Logged in',
         es: 'Inició sesión'
-    }
+    };
     
     // prototype holds functions to save memory space
     Greetr.prototype = {
@@ -36,7 +36,8 @@
             return this.firstName + ' ' + this.lastName;
         },
         
-        validate() function() {
+        // check the language is valid
+        validate: function() {
             if (supportedLangs.indexOf(this.language) === -1) {
                 throw "Invalid lanauge";
             }
@@ -47,28 +48,46 @@
         },
         
         formalGreeting: function() {
-            return formalGreetings[this.language] + ' ' + this.fullName;
+            return formalGreetings[this.language] + ' ' + this.fullName();
         },
         
         // chainable methods - returns it's containing object
-        greet: function(formal) {
+        greet: function(isFormal) {
             var msg;
             
             // if undefined or null it will be coerced to 'false'
-            if (formal) {
+            if (isFormal) {
                 msg = this.formalGreeting();
             }
             else {
-                msg = this.greeting();
+                msg = this.informalGreeting();
             }
             
             if (console) {
                 console.log(msg);
             }
             
-            // 'this' refers to teh calling object at execution time and makes the method chainable
+            // 'this' refers to the calling object at execution time and makes the method chainable
+            return this;
+        },
+        
+        log: function() {
+            
+            if (console) {
+                console.log(logMessages[this.language] + ': ' + this.fullName());
+            }
+            
+            return this;
+        },
+        
+        setLang: function(lang) {
+            this.language = lang;
+            
+            this.validate();
+            
             return this;
         }
+        
     };
     
     // function constructor - object is created here which means the user can 'new' an object without having to call new
@@ -78,6 +97,8 @@
         self.firstName = firstName || '';
         self.lastName = lastName || '';
         self.language = language || 'en';
+        
+        self.validate();
         
     }
     
